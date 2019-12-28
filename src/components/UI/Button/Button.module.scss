@@ -1,0 +1,60 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+@import '../../../sass/animations';
+
+.Btn {
+    padding: 1rem;
+    border-radius: .5rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    font-weight: 600;
+    color: $color-white;
+    border: none;
+    margin: .3rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background-color: transparent;
+
+    &:focus {
+        outline: none;
+        border: 1px solid $color-white;
+    }
+
+    &:disabled {
+        background-color: $color-disabled;
+        cursor: not-allowed;
+    }
+}
+
+.Danger {
+    background-color: $color-danger;
+}
+
+.Success {
+    background-color: $color-success;
+}
+
+.Order {
+    font-size: 1.6rem;
+    min-width: 20rem;
+}
+
+.OrderActive {
+    font-size: 1.6rem;
+    min-width: 20rem;
+    background-color: $color-success;
+    animation: nowActive .5s ease-out infinite;
+}
+
+.Reset {
+    background-color: $color-danger;
+    font-size: 1.6rem;
+}
+
+.Text {
+    text-transform: none;
+    &:focus {
+        outline: initial;
+        border: 1px solid transparent;
+    }
+}

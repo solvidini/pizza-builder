@@ -1,0 +1,11 @@
+@import './../../../sass/variables';
+
+.build-controls {
+    color: $color-white;
+    display: flex;
+    flex-flow: column wrap;
+    height: 45rem;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16.8rem;
+}

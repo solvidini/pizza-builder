@@ -1,0 +1,23 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+@import '../../../sass/animations';
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    background-color: $color-alternative;
+    color: $color-white;
+    width: 50rem;
+    top: 30%;
+    left: calc(50% - 25rem);
+    box-shadow: 0 2px 3px $color-black;
+    border: 1px solid $color-black;
+    padding: 1.6rem;
+    border-radius: 1rem;
+    transition: all 0.3s ease-out;
+
+    @include respond(phone) {
+        width: 90%;
+        left: 5%;
+    }
+}

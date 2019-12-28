@@ -1,0 +1,19 @@
+@import './../../../sass/variables';
+@import './../../../sass/mixins';
+
+.checkout-summary {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+
+    &__title {
+        color: $color-white;
+        text-transform: uppercase;
+    }
+
+    &__pizza {
+        margin: 2rem auto;
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,19 @@
+@import '../../sass/variables';
+@import '../../sass/mixins';
+
+.example {
+    margin: 2rem;
+    max-width: 30rem;
+
+    &__title {
+        color: $color-white;
+        text-transform: capitalize;
+        text-align: center;
+        font-size: $title-font-size;
+        font-weight: 400;
+    }
+
+    &__button {
+        text-align: center;
+    }
+}

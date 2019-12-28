@@ -1,0 +1,52 @@
+@import '../../../../sass/variables';
+@import '../../../../sass/mixins';
+
+.navigation-item {
+    display: flex;
+    height: 100%;
+    width: auto;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    @include respond(phone) {
+        width: 100%;
+        height: 8rem;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+    }
+
+    &__link:link,
+    &__link:visited {
+        color: $color-inactive;
+        text-decoration: none;
+        width: 100%;
+        padding: 1.7rem 2rem;
+        border-bottom: 2px solid transparent;
+        transition: all .2s ease;
+        
+        &:hover {
+            color: white;
+        }
+
+        @include respond(phone) {
+            border-bottom: none;
+            border-right: 4px solid transparent;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    & &__link:active,
+    & &__link--active {
+        color: $color-white;
+        border-bottom: 2px solid $color-white;
+
+        @include respond(phone) {
+            border-bottom: none;
+            border-right: 4px solid $color-white;
+        }
+    }
+
+}

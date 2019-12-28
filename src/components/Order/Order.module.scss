@@ -1,0 +1,54 @@
+@import './../../sass/variables';
+@import './../../sass/mixins';
+
+
+.Order {
+    width: 80%;
+    font-size: $default-font-size;
+    border: 1px solid $color-black;
+    box-shadow: 0 2px 3px $color-black;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    box-sizing: border-box;
+
+    background-color: $color-alternative;
+    color: $color-white;
+
+    @include respond(phone) {
+        width: 100%;
+    }
+
+    &__paragraph {
+        line-height: 2;
+
+        &:not(:first-child) {
+            margin-top: 1rem;
+        }
+    }
+}
+
+.Ingredients {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    &__item {
+        border: 1px solid rgb(150, 150, 150);
+        border-radius: .5rem;
+        padding: .2rem .5rem;
+        flex: 0 0 19%;
+        margin: .5rem 0;
+        text-align: center;
+        text-transform: capitalize;
+        line-break: none;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
+
+        @include respond(phone) {
+            flex: 0 0 30%;
+        }
+    }
+}

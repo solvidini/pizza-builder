@@ -1,0 +1,17 @@
+@import '../../../sass/variables';
+@import '../../../sass/mixins';
+
+.navigation-items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    height: 100%;
+
+    @include respond(phone) {
+        flex-flow: column;
+        width: 100%;
+    }
+}

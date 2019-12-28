@@ -1,0 +1,60 @@
+@import './sass/variables';
+@import './sass/mixins';
+@import './sass/animations';
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    font-weight: 400;
+    letter-spacing: .1rem;
+
+    @include respond(big-desktop) {
+        font-size: 75%;
+    }
+
+    @include respond(tab-land) {
+        font-size: 56.25%;
+    }
+
+    @include respond(tab-port) {
+        font-size: 50%;
+    }
+}
+
+
+body {
+    box-sizing: border-box;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background-color: $color-background;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
+
+::selection {
+    background-color: rgba($color-white, .8);
+    color: black;
+}
+
+.content {
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+.center {
+    text-align: center;
+}

@@ -1,0 +1,47 @@
+@import '../../../sass/mixins';
+@import '../../../sass/animations';
+@import '../../../sass/variables';
+
+.toolbar {
+    height: 5.5rem;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $color-alternative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 300;
+    border-bottom: 1px solid black;
+
+    &--transparent {
+        background-color: transparent;
+        border-bottom: 1px solid transparent;
+        color: transparent;
+    }
+
+    &__navigation {
+        height: 100%;
+
+        @include respond(phone) {
+            display: none;
+        }
+    }
+
+    color: rgba($color-white, .8);
+
+    &__logo {
+        height: 90%;
+        display: flex;
+        align-items: center;
+
+        & p {
+            text-transform: uppercase;
+            font-size: 2rem;
+            letter-spacing: .5rem;
+            margin: 0 1rem 0 1.5rem;
+        }
+    }
+}
