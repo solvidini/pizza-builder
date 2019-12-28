@@ -4,10 +4,13 @@ import { connect } from 'react-redux';
 
 import './App.scss';
 import Layout from './containers/Layout/Layout';
-import PizzaBuilder from './containers/PizzaBuilder/PizzaBuilder';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 import Spinner from './components/UI/Spinner/Spinner';
+
+const PizzaBuilder = React.lazy(() => {
+	return import('./containers/PizzaBuilder/PizzaBuilder');
+})
 
 const Auth = React.lazy(() => {
 	return import('./containers/Auth/Auth');

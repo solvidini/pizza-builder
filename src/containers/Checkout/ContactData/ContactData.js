@@ -9,7 +9,7 @@ import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import Modal from './../../../components/UI/Modal/Modal';
 import * as actions from '../../../store/actions/index';
-import { updateObject, checkValidity } from '../../../shared/utility';
+import { checkValidity } from '../../../shared/utility';
 
 const ContactData = props => {
 	const [orderForm, setOrderForm] = useState({
@@ -133,18 +133,21 @@ const ContactData = props => {
 	};
 
 	const inputChangedHandler = (event, inputIdentifier) => {
-		const updatedFormElement = updateObject(orderForm[inputIdentifier], {
-			value: event.target.value,
-			valid: checkValidity(event.target.value, orderForm[inputIdentifier].validation),
-		});
-		const updatedOrderForm = updateObject(orderForm, {
-			[inputIdentifier]: updatedFormElement,
-		});
+		const updatedOrderForm = {
+			...orderForm,
+		}
+		const updatedOrderFormElement = {
+			...updatedOrderForm[inputIdentifier]
+		}
+		updatedOrderFormElement.value = event.target.value;
+		updatedOrderFormElement.valid = checkValidity(event.target.value, orderForm[inputIdentifier].validation);
+		updatedOrderForm[inputIdentifier] = updatedOrderFormElement;
 
 		let formIsValid = true;
 		for (let inputIdentifier in updatedOrderForm) {
 			formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
 		}
+		
 		setOrderForm(updatedOrderForm);
 		setFormIsValid(formIsValid);
 	};
@@ -235,4 +238,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(React.memo(ContactData), axios));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

@@ -1,11 +1,16 @@
 @import './../../../sass/variables';
+@import './../../../sass/mixins';
 
 .build-controls {
     color: $color-white;
+    width: 35rem;
+    height: 100%;
     display: flex;
-    flex-flow: column wrap;
-    height: 45rem;
-    align-items: center;
+    flex-flow: row wrap;
     justify-content: center;
-    margin-right: 16.8rem;
+    align-items: center;
+
+    @include respond(tab-port) {
+        margin-bottom: 1rem;
+    }
 }

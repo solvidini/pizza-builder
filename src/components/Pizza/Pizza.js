@@ -23,15 +23,9 @@ const Pizza = props => {
 						<PizzaIngredient
 							key={igKey + i + x + 'v'}
 							type={igKey}
-							ingredientStyle={
-								!props.smallIng
-									? {
-											transform: `scale(.25) translate(-${positionX}%, -${positionY}%) rotate(${rotate}deg)`,
-									  }
-									: {
-											transform: `scale(.2) translate(-${positionX}%, -${positionY}%) rotate(${rotate}deg)`,
-									  }
-							}
+							ingredientStyle={{
+								transform: `scale(.25) translate(-${positionX}%, -${positionY}%) rotate(${rotate}deg)`,
+							}}
 						/>
 					);
 				}
@@ -43,15 +37,9 @@ const Pizza = props => {
 						<PizzaIngredient
 							key={igKey + i + x + 'h'}
 							type={igKey}
-							ingredientStyle={
-								!props.smallIng
-									? {
-											transform: `scale(.25) translate(-${positionX}%, -${positionY}%) rotate(${rotate}deg)`,
-									  }
-									: {
-											transform: `scale(.2) translate(-${positionX}%, -${positionY}%) rotate(${rotate}deg)`,
-									  }
-							}
+							ingredientStyle={{
+								transform: `scale(.25) translate(-${positionX}%, -${positionY}%) rotate(${rotate}deg)`,
+							}}
 						/>
 					);
 				}

@@ -100,4 +100,4 @@ PizzaIngredient.propTypes = {
 	type: PropTypes.string.isRequired,
 };
 
-export default PizzaIngredient;
+export default React.memo(PizzaIngredient);

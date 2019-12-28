@@ -7,7 +7,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
-import { updateObject, checkValidity } from '../../shared/utility';
+import { checkValidity } from '../../shared/utility';
 
 const Auth = props => {
 	const [authForm, setAuthForm] = useState({
@@ -50,26 +50,29 @@ const Auth = props => {
 		}
 	}, [buildingPizza, authRedirectPath, onSetAuthRedirectPath]);
 
-	const inputChangedHandler = (event, controlName) => {
-		const updatedControls = updateObject(authForm, {
-			[controlName]: updateObject(authForm[controlName], {
-				value: event.target.value,
-				valid: checkValidity(event.target.value, authForm[controlName].validation),
-			}),
-		});
-		setAuthForm(updatedControls);
-	};
-
-	const inputFocusedHandler = (event, controlName) => {
-		const updatedControls = {
+	const inputChangedHandler = (event, formElementName) => {
+		const updatedForm = {
 			...authForm,
 		};
 		const updatedFormElement = {
-			...updatedControls[controlName],
+			...updatedForm[formElementName],
+		};
+		updatedFormElement.value = event.target.value;
+		updatedFormElement.valid = checkValidity(event.target.value, authForm[formElementName].validation);
+		updatedForm[formElementName] = updatedFormElement;
+		setAuthForm(updatedForm);
+	};
+
+	const inputFocusedHandler = (event, formElementName) => {
+		const updatedForm = {
+			...authForm,
+		};
+		const updatedFormElement = {
+			...updatedForm[formElementName],
 		};
 		updatedFormElement.touched = true;
-		updatedControls[controlName] = updatedFormElement;
-		setAuthForm(updatedControls);
+		updatedForm[formElementName] = updatedFormElement;
+		setAuthForm(updatedForm);
 	};
 
 	const submitHandler = event => {
@@ -112,15 +115,12 @@ const Auth = props => {
 	let errorMessage = null;
 
 	if (props.error) {
-		let uglyErrorMessage = props.error.message.replace(/_/g, " ");
-		if (
-		  uglyErrorMessage === "INVALID PASSWORD" ||
-		  uglyErrorMessage === "EMAIL NOT FOUND"
-		) {
-		  uglyErrorMessage = "INVALID EMAIL OR PASSWORD";
+		let uglyErrorMessage = props.error.message.replace(/_/g, ' ');
+		if (uglyErrorMessage === 'INVALID PASSWORD' || uglyErrorMessage === 'EMAIL NOT FOUND') {
+			uglyErrorMessage = 'INVALID EMAIL OR PASSWORD';
 		}
-		errorMessage = <p style={{ color: "red" }}>{uglyErrorMessage}</p>;
-	  }
+		errorMessage = <p style={{ color: 'red' }}>{uglyErrorMessage}</p>;
+	}
 
 	let authRedirect = null;
 	if (props.isAuthenticated) {
@@ -129,7 +129,6 @@ const Auth = props => {
 
 	let canSubmit = false;
 	if (authForm.email.valid && authForm.password.valid) canSubmit = true;
-
 	return (
 		<div className="authentication">
 			{authRedirect}
