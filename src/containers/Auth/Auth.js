@@ -11,16 +11,16 @@ import { updateObject, checkValidity } from '../../shared/utility';
 
 const Auth = props => {
 	const [authForm, setAuthForm] = useState({
-		username: {
+		email: {
 			elementType: 'input',
 			elementConfig: {
-				type: 'text',
-				placeholder: 'Your username',
+				type: 'email',
+				placeholder: 'Your E-Mail',
 			},
 			value: '',
 			validation: {
 				required: true,
-				minLength: 3,
+				isEmail: true,
 			},
 			valid: false,
 			touched: false,
@@ -45,9 +45,9 @@ const Auth = props => {
 	const { buildingPizza, authRedirectPath, onSetAuthRedirectPath } = props;
 
 	useEffect(() => {
-	  if (!buildingPizza && authRedirectPath !== "/") {
-		onSetAuthRedirectPath();
-	  }
+		if (!buildingPizza && authRedirectPath !== '/') {
+			onSetAuthRedirectPath();
+		}
 	}, [buildingPizza, authRedirectPath, onSetAuthRedirectPath]);
 
 	const inputChangedHandler = (event, controlName) => {
@@ -74,7 +74,7 @@ const Auth = props => {
 
 	const submitHandler = event => {
 		event.preventDefault();
-		props.onAuth(authForm.username.value, authForm.password.value, isSignup);
+		props.onAuth(authForm.email.value, authForm.password.value, isSignup);
 	};
 
 	const switchAuthModeHandler = () => {
@@ -112,14 +112,15 @@ const Auth = props => {
 	let errorMessage = null;
 
 	if (props.error) {
-		let uglyErrorMessage = props.error.replace(/_/g, ' ');
-		if (uglyErrorMessage === 'Unauthorized') {
-			uglyErrorMessage = 'INVALID USERNAME OR PASSWORD';
-		} else {
-			uglyErrorMessage = 'SOMETHING WENT WRONG. TRY AGAIN.';
+		let uglyErrorMessage = props.error.message.replace(/_/g, " ");
+		if (
+		  uglyErrorMessage === "INVALID PASSWORD" ||
+		  uglyErrorMessage === "EMAIL NOT FOUND"
+		) {
+		  uglyErrorMessage = "INVALID EMAIL OR PASSWORD";
 		}
-		errorMessage = <p style={{ color: 'red' }}>{uglyErrorMessage}</p>;
-	}
+		errorMessage = <p style={{ color: "red" }}>{uglyErrorMessage}</p>;
+	  }
 
 	let authRedirect = null;
 	if (props.isAuthenticated) {
@@ -127,7 +128,7 @@ const Auth = props => {
 	}
 
 	let canSubmit = false;
-	if (authForm.username.valid && authForm.password.valid) canSubmit = true;
+	if (authForm.email.valid && authForm.password.valid) canSubmit = true;
 
 	return (
 		<div className="authentication">
@@ -159,7 +160,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onAuth: (username, password, isSignup) => dispatch(actions.auth(username, password, isSignup)),
+		onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
 		onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
 	};
 };

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import './ContactData.scss';
@@ -58,12 +58,12 @@ const ContactData = props => {
 			valid: false,
 			touched: false,
 		},
-		country: {
+		city: {
 			elementType: 'input',
-			name: 'country',
+			name: 'city',
 			elementConfig: {
 				type: 'text',
-				placeholder: 'Country',
+				placeholder: 'City',
 			},
 			value: '',
 			validation: {
@@ -103,6 +103,18 @@ const ContactData = props => {
 	});
 	const [formIsValid, setFormIsValid] = useState(false);
 	const [ordered, setOrdered] = useState(false);
+
+	useEffect(() => {
+		let timeout = null;
+		if (props.purchased && ordered) {
+			timeout = setTimeout(() => {
+				props.history.push('/');
+			}, 5000);
+		}
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [props.purchased, props.history, ordered]);
 
 	const orderHandler = event => {
 		event.preventDefault();
@@ -213,6 +225,7 @@ const mapStateToProps = state => {
 		loading: state.order.loading,
 		token: state.auth.token,
 		userId: state.auth.userId,
+		purchased: state.order.purchased,
 	};
 };
 

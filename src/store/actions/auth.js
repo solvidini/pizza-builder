@@ -40,25 +40,26 @@ export const checkAuthTimeout = expirationTime => {
 	};
 };
 
-export const auth = (username, password, isSignup) => {
+export const auth = (email, password, isSignup) => {
 	return dispatch => {
 		dispatch(authStart());
 		const authData = {
-			username: username,
-			password: password,
+            email: email,
+            password: password,
+            returnSecureToken: true
 		};
-		let url = 'http://127.0.0.1:8080/register'; //register
+		let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAVGAcDYsX_mgpEDzsAUw34B0RmRPd7dFw'; //register
 		if (!isSignup) {
-			url = 'http://127.0.0.1:8080/authenticate'; //login
+			url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAVGAcDYsX_mgpEDzsAUw34B0RmRPd7dFw'; //login
 		}
 		axios
 			.post(url, authData)
 			.then(response => {
 				const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-				localStorage.setItem('token', response.data.token);
+				localStorage.setItem('token', response.data.idToken);
 				localStorage.setItem('expirationDate', expirationDate);
-				localStorage.setItem('userId', response.data.username);
-				dispatch(authSuccess(response.data.token, response.data.username));
+				localStorage.setItem('userId', response.data.localId);
+				dispatch(authSuccess(response.data.idToken, response.data.localId));
 				dispatch(checkAuthTimeout(response.data.expiresIn));
 			})
 			.catch(err => {

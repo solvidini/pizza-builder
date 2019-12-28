@@ -24,21 +24,15 @@ export const purchasePizzaStart = () => {
 
 export const purchasePizza = (orderData, token) => {
 	return dispatch => {
-        dispatch(purchasePizzaStart());
-        const orderDataWithDate = {
-            ...orderData,
-            date: new Date()
-        }
-		const config = {
-			headers: {
-				'Authorization': 'Bearer '.concat(token),
-				'Content-Type': 'application/json',
-			},
+		dispatch(purchasePizzaStart());
+		const orderDataWithDate = {
+			...orderData,
+			date: new Date(),
 		};
 		axios
-			.post('/orders', orderDataWithDate, config)
+			.post('/orders.json?auth=' + token, orderDataWithDate)
 			.then(response => {
-				dispatch(purchasePizzaSuccess(response.data.id, orderDataWithDate));
+				dispatch(purchasePizzaSuccess(response.data.name, orderDataWithDate));
 			})
 			.catch(error => {
 				dispatch(purchasePizzaFail(error));
@@ -72,22 +66,17 @@ export const fetchOrdersStart = () => {
 	};
 };
 
-export const fetchOrders = token => {
+export const fetchOrders = (token, userId) => {
 	return dispatch => {
 		dispatch(fetchOrdersStart());
-		const config = {
-			headers: {
-				'Authorization': 'Bearer '.concat(token),
-				'Content-Type': 'application/json',
-			},
-		};
-		axios
-			.get('/orders', config)
+		const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+		axios.get('/orders.json' + queryParams)
 			.then(res => {
 				const fetchedOrders = [];
 				for (let key in res.data) {
 					fetchedOrders.push({
 						...res.data[key],
+						id: key
 					});
 				}
 				dispatch(fetchOrdersSuccess(fetchedOrders));

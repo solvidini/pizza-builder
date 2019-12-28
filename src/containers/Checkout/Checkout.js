@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -13,14 +13,6 @@ const Checkout = props => {
 	const checkoutContinuedHandler = () => {
 		props.history.replace('/checkout/contact-data');
 	};
-
-	useEffect(() => {
-		if (props.purchased) {
-			setTimeout(() => {
-				props.history.push('/');
-			}, 5000);
-		}
-	}, [props.purchased, props.history]);
 
 	let summary = <Redirect to="/" />;
 	if (props.ingredients) {
