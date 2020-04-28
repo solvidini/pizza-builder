@@ -1,4 +1,4 @@
-## General info
+# Pizza Builder
 
 This is an application to create and order a pizza. This is a firebase version that is available online.  
 There's also another version I made with my own backend service in Spring Boot:  
@@ -10,7 +10,7 @@ There's also another version I made with my own backend service in Spring Boot:
 Main technologies I used to create this application:
 
 -   React
--   SASS
+-   Sass
 -   Redux
 -   REST API Architecture
 
@@ -19,3 +19,6 @@ Main technologies I used to create this application:
 ## Live
 
 [Click here](https://pizza-builder-6412e.firebaseapp.com/)
+
+## Author
+Samuel Kędziora
